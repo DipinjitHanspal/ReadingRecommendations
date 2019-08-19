@@ -1,0 +1,19 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "node-fetch-npm": "^2.0.2",
+    "fetch": "^1.1.0",
+    "d3": "^5.10.0",
+    "papaparse": "^5.0.2",
+    "git": "^0.1.5",
+    "express": "latest",
+    "body-parser": "latest"
+  }
+}
