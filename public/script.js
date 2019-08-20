@@ -13,30 +13,54 @@ class Book {
 	}
 }
 
-const lst = []
+const lst = [{}]
 
 Vue.component('books-grid', {
 	data() {
 		return {
-			lst
+			bookList : [],
 		}
 	},
 	methods: {
-		getData: function () {
-			fetch('/books').then(function (response) {
-				return response.json();
-			}).then((book) => {
-				console.log(JSON.stringify(book));
-				return new Book(book['bookID'], book['title'], book['authors'],
-					book['average_rating'], book['isbn'], book['isbn13'], book['language_code'], book['num_pages'], book['ratings_count'], book['text_reviews_count']);
-			}).then((book) => {
-				this.lst.push(book)
-			})
-		}.bind(this)
+		// getData: function () {
+		// 	fetch('/books').then(function (response) {
+		// 		return response.json();
+		// 	}).then((book) => {
+		// 		console.log(JSON.stringify(book));
+		// 		return new Book(book['bookID'], book['title'], book['authors'],
+		// 			book['average_rating'], book['isbn'], book['isbn13'], book['language_code'], book['num_pages'], book['ratings_count'], book['text_reviews_count']);
+		// 	}).then((book) => {
+		// 		this.lst.push(book)
+		// 	})
+		// }
 	},
-	template: '<div id="books-grid"><div v-bind:="lst" v-for:="book in lst" :key="book.bookID"> {{ book.title }}</div></div>',
-	beforeMount() {
-		this.getData()
+	template: '<div id="books-grid"><div class="book-item" v-for="book in bookList" :key="book.bookID" v-if="bookList.length > 0"> {{ book.title }} : {{ book.authors }} </div></div>',
+	// beforeMount() {
+	// },
+	created() {
+		fetch('/books').then((response) => {
+			return response.json();
+		}).then((book) => {
+			console.log(JSON.stringify(book));
+			return new Book(book['bookID'], book['title'], book['authors'],
+				book['average_rating'], book['isbn'], book['isbn13'], book['language_code'], book['num_pages'], book['ratings_count'], book['text_reviews_count']);
+		}).then((book) => {
+			this.bookList.push(book)
+		});
+	},
+	computed: {
+		// bookList : function() {
+		// 	return fetch('/books').then((response) => {
+		// 		return response.json();
+		// 	}).then((book) => {
+		// 		console.log(JSON.stringify(book));
+		// 		return new Book(book['bookID'], book['title'], book['authors'],
+		// 			book['average_rating'], book['isbn'], book['isbn13'], book['language_code'], book['num_pages'], book['ratings_count'], book['text_reviews_count']);
+		// 	}).then((book) => {
+		// 		this.lst.push(book)
+		// 		return book;
+		// 	});
+		// }
 	}
 })
 
@@ -48,7 +72,7 @@ Vue.component('hello',
 const app = new Vue({
 	el: '#app',
 	data: {
-		lst: [],
+		lst: [{bookID: "12asf", title:"Hello"}],
 	},
 	methods: {
 
