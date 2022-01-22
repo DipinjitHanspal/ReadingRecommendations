@@ -7,7 +7,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "node-fetch-npm": "^2.0.2",
     "fetch": "^1.1.0",
     "d3": "^5.10.0",
